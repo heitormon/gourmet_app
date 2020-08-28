@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
+import app_gourmet.model.Food;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -23,8 +25,8 @@ public class Main {
 		String firstQuestion = "Sua comida seria um(a) %s?";
 		String secondQuestion = "Sua comida é %s?";
 
-		String firstInput = "Type the name of food";
-		String secondInput = "%s  is ______ and %s is not.";
+		String firstInput = "Digite o nome da comida: ";
+		String secondInput = "%s  é ______ e %s não é.";
 
 		List<Food> listYesFood = new ArrayList<Food>();
 		listYesFood.add(new Food("Sushi", "Peixe"));
@@ -43,6 +45,7 @@ public class Main {
 		button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(mainFrame, "Pense em uma comida");
 				int secondPanel = createOptionDialog(String.format(firstQuestion, listYesFood.get(0).getType()), title);
 
 				List<Food> currentFoodList = (secondPanel == 0) ? listYesFood : listNoFood;
@@ -65,7 +68,10 @@ public class Main {
 							String newFoodName = createInputDialog(firstInput);
 							String newFoodType = createInputDialog(
 									String.format(secondInput, newFoodName, food.getName()));
-							currentFoodList.add(new Food(newFoodName, newFoodType));
+							if (newFoodName != null && newFoodType != null) {
+								currentFoodList.add(new Food(newFoodName, newFoodType));
+
+							}
 							return;
 						}
 					}
@@ -82,25 +88,6 @@ public class Main {
 
 	public static String createInputDialog(String message) {
 		return JOptionPane.showInputDialog(message);
-	}
-
-	private static class Food {
-		private String name;
-		private String type;
-
-		public String getName() {
-			return name;
-		}
-
-		public String getType() {
-			return type;
-		}
-
-		public Food(String name, String type) {
-			this.name = name;
-			this.type = type;
-		}
-
 	}
 
 }

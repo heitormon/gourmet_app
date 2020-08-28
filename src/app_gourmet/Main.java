@@ -66,12 +66,14 @@ public class Main {
 					} else {
 						if (index == currentFoodList.size() - 1) {
 							String newFoodName = createInputDialog(firstInput);
-							String newFoodType = createInputDialog(
-									String.format(secondInput, newFoodName, food.getName()));
-							if (newFoodName != null && newFoodType != null) {
-								currentFoodList.add(new Food(newFoodName, newFoodType));
-
+							if (newFoodName != null) {
+								String newFoodType = createInputDialog(
+										String.format(secondInput, newFoodName, food.getName()));
+								if (newFoodType != null) {
+									currentFoodList.add(new Food(newFoodName, newFoodType));
+								}
 							}
+
 							return;
 						}
 					}

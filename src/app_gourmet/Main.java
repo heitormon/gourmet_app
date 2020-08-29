@@ -63,6 +63,7 @@ public class Main {
 
 					if (thirdPanel == 0) {
 						JOptionPane.showMessageDialog(mainFrame, "Acertei! :D");
+						return;
 					} else {
 						if (index == currentFoodList.size() - 1) {
 							String newFoodName = createInputDialog(firstInput);

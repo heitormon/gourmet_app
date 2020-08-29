@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
-import app_gourmet.model.Food;
+import app_gourmet.models.Food;
 
 public class Main {
 

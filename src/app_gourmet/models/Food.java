@@ -1,4 +1,4 @@
-package app_gourmet.model;
+package app_gourmet.models;
 
 public class Food {
 

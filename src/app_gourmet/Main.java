@@ -22,14 +22,13 @@ public class Main {
 		String labelPrincipal = "Gourmet Guesser System";
 		String buttonPrincipal = "começar";
 
-		String firstQuestion = "Sua comida seria um(a) %s?";
-		String secondQuestion = "Sua comida é %s?";
+		String firstQuestion = "O prato que você pensou é %s?";
 
-		String firstInput = "Digite o nome da comida: ";
-		String secondInput = "%s  é ______ e %s não é.";
+		String firstInput = "Qual prato você pensou? ";
+		String secondInput = "%s é ______ mas %s não.";
 
 		List<Food> listYesFood = new ArrayList<Food>();
-		listYesFood.add(new Food("Sushi", "Peixe"));
+		listYesFood.add(new Food("Lasanha", "Massa"));
 		List<Food> listNoFood = new ArrayList<Food>();
 		listNoFood.add(new Food("Batata Frita", "Fast-food"));
 
@@ -48,24 +47,37 @@ public class Main {
 				JOptionPane.showMessageDialog(mainFrame, "Pense em uma comida");
 				int secondPanel = createOptionDialog(String.format(firstQuestion, listYesFood.get(0).getType()), title);
 
+				boolean lastQuestion = false;
 				List<Food> currentFoodList = (secondPanel == 0) ? listYesFood : listNoFood;
 
 				for (int index = 0; index < currentFoodList.size(); index++) {
+					System.out.println("Loop INIT");
 					Food food = currentFoodList.get(index);
-					int thirdPanel = 1;
+					int thirdPanel = 3;
 
-					if (index != 0 || secondPanel == 1) {
+					if (index + 1 != currentFoodList.size()) {
+						food = currentFoodList.get(index + 1);
 						secondPanel = createOptionDialog(String.format(firstQuestion, food.getType()), title);
+					} else {
+						if (secondPanel == 1) {
+							System.out.println("LAST QUESTION");
+							thirdPanel = createOptionDialog(
+									String.format(firstQuestion, currentFoodList.get(0).getName()), title);
+							lastQuestion = true;
+						}
 					}
-					if (secondPanel == 0) {
-						thirdPanel = createOptionDialog(String.format(secondQuestion, food.getName()), title);
-					}
+					if (!lastQuestion) {
+						if (secondPanel == 0) {
+							System.out.println("index:" + index + " FOOD: " + food.getName());
+							thirdPanel = createOptionDialog(String.format(firstQuestion, food.getName()), title);
+						}
 
+					}
 					if (thirdPanel == 0) {
 						JOptionPane.showMessageDialog(mainFrame, "Acertei! :D");
 						return;
 					} else {
-						if (index == currentFoodList.size() - 1) {
+						if (index == currentFoodList.size() - 1 || thirdPanel == 1) {
 							String newFoodName = createInputDialog(firstInput);
 							if (newFoodName != null) {
 								String newFoodType = createInputDialog(

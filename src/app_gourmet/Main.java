@@ -51,7 +51,6 @@ public class Main {
 				List<Food> currentFoodList = (secondPanel == 0) ? listYesFood : listNoFood;
 
 				for (int index = 0; index < currentFoodList.size(); index++) {
-					System.out.println("Loop INIT");
 					Food food = currentFoodList.get(index);
 					int thirdPanel = 3;
 
@@ -60,7 +59,6 @@ public class Main {
 						secondPanel = createOptionDialog(String.format(firstQuestion, food.getType()), title);
 					} else {
 						if (secondPanel == 1) {
-							System.out.println("LAST QUESTION");
 							thirdPanel = createOptionDialog(
 									String.format(firstQuestion, currentFoodList.get(0).getName()), title);
 							lastQuestion = true;
@@ -68,7 +66,6 @@ public class Main {
 					}
 					if (!lastQuestion) {
 						if (secondPanel == 0) {
-							System.out.println("index:" + index + " FOOD: " + food.getName());
 							thirdPanel = createOptionDialog(String.format(firstQuestion, food.getName()), title);
 						}
 
